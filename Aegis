@@ -3,19 +3,19 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "509c37d1",
+   "id": "f9fe1e40",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-07T13:29:10.204587Z",
-     "iopub.status.busy": "2026-02-07T13:29:10.204330Z",
-     "iopub.status.idle": "2026-02-07T13:29:16.925903Z",
-     "shell.execute_reply": "2026-02-07T13:29:16.925058Z"
+     "iopub.execute_input": "2026-02-07T13:40:33.098447Z",
+     "iopub.status.busy": "2026-02-07T13:40:33.098217Z",
+     "iopub.status.idle": "2026-02-07T13:40:43.903617Z",
+     "shell.execute_reply": "2026-02-07T13:40:43.902777Z"
     },
     "papermill": {
-     "duration": 6.726446,
-     "end_time": "2026-02-07T13:29:16.927624",
+     "duration": 10.810803,
+     "end_time": "2026-02-07T13:40:43.905093",
      "exception": false,
-     "start_time": "2026-02-07T13:29:10.201178",
+     "start_time": "2026-02-07T13:40:33.094290",
      "status": "completed"
     },
     "tags": []
@@ -56,19 +56,19 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "d268ffea",
+   "id": "5d0e6df2",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-07T13:29:16.932276Z",
-     "iopub.status.busy": "2026-02-07T13:29:16.931937Z",
-     "iopub.status.idle": "2026-02-07T13:29:17.305555Z",
-     "shell.execute_reply": "2026-02-07T13:29:17.304328Z"
+     "iopub.execute_input": "2026-02-07T13:40:43.911245Z",
+     "iopub.status.busy": "2026-02-07T13:40:43.910498Z",
+     "iopub.status.idle": "2026-02-07T13:40:44.283808Z",
+     "shell.execute_reply": "2026-02-07T13:40:44.282693Z"
     },
     "papermill": {
-     "duration": 0.377794,
-     "end_time": "2026-02-07T13:29:17.307212",
+     "duration": 0.378053,
+     "end_time": "2026-02-07T13:40:44.285539",
      "exception": false,
-     "start_time": "2026-02-07T13:29:16.929418",
+     "start_time": "2026-02-07T13:40:43.907486",
      "status": "completed"
     },
     "tags": []
@@ -96,7 +96,7 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "/usr/local/lib/python3.12/dist-packages/xgboost/training.py:199: UserWarning: [13:29:17] WARNING: /workspace/src/learner.cc:790: \n",
+      "/usr/local/lib/python3.12/dist-packages/xgboost/training.py:199: UserWarning: [13:40:44] WARNING: /workspace/src/learner.cc:790: \n",
       "Parameters: { \"use_label_encoder\" } are not used.\n",
       "\n",
       "  bst.update(dtrain, iteration=i, fobj=obj)\n"
@@ -144,19 +144,19 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "54d8ebca",
+   "id": "ca65c548",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-07T13:29:17.312072Z",
-     "iopub.status.busy": "2026-02-07T13:29:17.311792Z",
-     "iopub.status.idle": "2026-02-07T13:29:31.302832Z",
-     "shell.execute_reply": "2026-02-07T13:29:31.301809Z"
+     "iopub.execute_input": "2026-02-07T13:40:44.292108Z",
+     "iopub.status.busy": "2026-02-07T13:40:44.291618Z",
+     "iopub.status.idle": "2026-02-07T13:40:54.613052Z",
+     "shell.execute_reply": "2026-02-07T13:40:54.612144Z"
     },
     "papermill": {
-     "duration": 13.995201,
-     "end_time": "2026-02-07T13:29:31.304290",
+     "duration": 10.326718,
+     "end_time": "2026-02-07T13:40:54.614865",
      "exception": false,
-     "start_time": "2026-02-07T13:29:17.309089",
+     "start_time": "2026-02-07T13:40:44.288147",
      "status": "completed"
     },
     "tags": []
@@ -231,19 +231,19 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "0a3c16e4",
+   "id": "74d4a694",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-07T13:29:31.309306Z",
-     "iopub.status.busy": "2026-02-07T13:29:31.308679Z",
-     "iopub.status.idle": "2026-02-07T13:29:36.617385Z",
-     "shell.execute_reply": "2026-02-07T13:29:36.616576Z"
+     "iopub.execute_input": "2026-02-07T13:40:54.621485Z",
+     "iopub.status.busy": "2026-02-07T13:40:54.621207Z",
+     "iopub.status.idle": "2026-02-07T13:41:00.402686Z",
+     "shell.execute_reply": "2026-02-07T13:41:00.401870Z"
     },
     "papermill": {
-     "duration": 5.313387,
-     "end_time": "2026-02-07T13:29:36.619380",
+     "duration": 5.786677,
+     "end_time": "2026-02-07T13:41:00.404265",
      "exception": false,
-     "start_time": "2026-02-07T13:29:31.305993",
+     "start_time": "2026-02-07T13:40:54.617588",
      "status": "completed"
     },
     "tags": []
@@ -310,19 +310,19 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "id": "e11511db",
+   "id": "142ec9db",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-07T13:29:36.624892Z",
-     "iopub.status.busy": "2026-02-07T13:29:36.624400Z",
-     "iopub.status.idle": "2026-02-07T13:30:16.628998Z",
-     "shell.execute_reply": "2026-02-07T13:30:16.628111Z"
+     "iopub.execute_input": "2026-02-07T13:41:00.410874Z",
+     "iopub.status.busy": "2026-02-07T13:41:00.410513Z",
+     "iopub.status.idle": "2026-02-07T13:41:39.322567Z",
+     "shell.execute_reply": "2026-02-07T13:41:39.321679Z"
     },
     "papermill": {
-     "duration": 40.009208,
-     "end_time": "2026-02-07T13:30:16.630702",
+     "duration": 38.917237,
+     "end_time": "2026-02-07T13:41:39.324108",
      "exception": false,
-     "start_time": "2026-02-07T13:29:36.621494",
+     "start_time": "2026-02-07T13:41:00.406871",
      "status": "completed"
     },
     "tags": []
@@ -333,22 +333,22 @@
      "output_type": "stream",
      "text": [
       "--- Starting Gait Model Training ---\n",
-      "Epoch 1/15, Loss: 0.5435\n",
-      "Epoch 2/15, Loss: 0.4443\n",
-      "Epoch 3/15, Loss: 0.3261\n",
-      "Epoch 4/15, Loss: 0.2599\n",
-      "Epoch 5/15, Loss: 0.2234\n",
-      "Epoch 6/15, Loss: 0.1867\n",
-      "Epoch 7/15, Loss: 0.1401\n",
-      "Epoch 8/15, Loss: 0.1163\n",
-      "Epoch 9/15, Loss: 0.0928\n",
-      "Epoch 10/15, Loss: 0.0816\n",
-      "Epoch 11/15, Loss: 0.0728\n",
-      "Epoch 12/15, Loss: 0.0607\n",
-      "Epoch 13/15, Loss: 0.0597\n",
-      "Epoch 14/15, Loss: 0.0524\n",
-      "Epoch 15/15, Loss: 0.0476\n",
-      "Gait Model Accuracy: 0.9817333851535173\n",
+      "Epoch 1/15, Loss: 0.4911\n",
+      "Epoch 2/15, Loss: 0.3894\n",
+      "Epoch 3/15, Loss: 0.3005\n",
+      "Epoch 4/15, Loss: 0.2704\n",
+      "Epoch 5/15, Loss: 0.2158\n",
+      "Epoch 6/15, Loss: 0.1679\n",
+      "Epoch 7/15, Loss: 0.1216\n",
+      "Epoch 8/15, Loss: 0.0992\n",
+      "Epoch 9/15, Loss: 0.0804\n",
+      "Epoch 10/15, Loss: 0.0735\n",
+      "Epoch 11/15, Loss: 0.0734\n",
+      "Epoch 12/15, Loss: 0.0621\n",
+      "Epoch 13/15, Loss: 0.0521\n",
+      "Epoch 14/15, Loss: 0.0477\n",
+      "Epoch 15/15, Loss: 0.0499\n",
+      "Gait Model Accuracy: 0.983482316362223\n",
       "Gait Agent weights saved as 'gait_agent_weights.pth'\n"
      ]
     }
@@ -395,6 +395,563 @@
     "# Run Training\n",
     "train_gait_model(num_epochs=15)"
    ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e8caec53",
+   "metadata": {
+    "papermill": {
+     "duration": 0.002963,
+     "end_time": "2026-02-07T13:41:39.330636",
+     "exception": false,
+     "start_time": "2026-02-07T13:41:39.327673",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "# Orchestrate with LangGraph (The Multi-Agent Mesh)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "18d3214b",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:41:39.337699Z",
+     "iopub.status.busy": "2026-02-07T13:41:39.337478Z",
+     "iopub.status.idle": "2026-02-07T13:42:01.396159Z",
+     "shell.execute_reply": "2026-02-07T13:42:01.395224Z"
+    },
+    "papermill": {
+     "duration": 22.06417,
+     "end_time": "2026-02-07T13:42:01.397757",
+     "exception": false,
+     "start_time": "2026-02-07T13:41:39.333587",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting langgraph\r\n",
+      "  Downloading langgraph-1.0.8-py3-none-any.whl.metadata (7.4 kB)\r\n",
+      "Requirement already satisfied: langchain in /usr/local/lib/python3.12/dist-packages (0.3.27)\r\n",
+      "Collecting langchain_openai\r\n",
+      "  Downloading langchain_openai-1.1.7-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "Requirement already satisfied: langchain-core>=0.1 in /usr/local/lib/python3.12/dist-packages (from langgraph) (0.3.79)\r\n",
+      "Collecting langgraph-checkpoint<5.0.0,>=2.1.0 (from langgraph)\r\n",
+      "  Downloading langgraph_checkpoint-4.0.0-py3-none-any.whl.metadata (4.9 kB)\r\n",
+      "Collecting langgraph-prebuilt<1.1.0,>=1.0.7 (from langgraph)\r\n",
+      "  Downloading langgraph_prebuilt-1.0.7-py3-none-any.whl.metadata (5.2 kB)\r\n",
+      "Collecting langgraph-sdk<0.4.0,>=0.3.0 (from langgraph)\r\n",
+      "  Downloading langgraph_sdk-0.3.4-py3-none-any.whl.metadata (1.6 kB)\r\n",
+      "Requirement already satisfied: pydantic>=2.7.4 in /usr/local/lib/python3.12/dist-packages (from langgraph) (2.12.5)\r\n",
+      "Requirement already satisfied: xxhash>=3.5.0 in /usr/local/lib/python3.12/dist-packages (from langgraph) (3.6.0)\r\n",
+      "Requirement already satisfied: langchain-text-splitters<1.0.0,>=0.3.9 in /usr/local/lib/python3.12/dist-packages (from langchain) (0.3.11)\r\n",
+      "Requirement already satisfied: langsmith>=0.1.17 in /usr/local/lib/python3.12/dist-packages (from langchain) (0.4.37)\r\n",
+      "Requirement already satisfied: SQLAlchemy<3,>=1.4 in /usr/local/lib/python3.12/dist-packages (from langchain) (2.0.44)\r\n",
+      "Requirement already satisfied: requests<3,>=2 in /usr/local/lib/python3.12/dist-packages (from langchain) (2.32.5)\r\n",
+      "Requirement already satisfied: PyYAML>=5.3 in /usr/local/lib/python3.12/dist-packages (from langchain) (6.0.3)\r\n",
+      "INFO: pip is looking at multiple versions of langchain-openai to determine which version is compatible with other requirements. This could take a while.\r\n",
+      "Collecting langchain_openai\r\n",
+      "  Downloading langchain_openai-1.1.6-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.5-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.4-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.3-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.2-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.1-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.1.0-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "INFO: pip is still looking at multiple versions of langchain-openai to determine which version is compatible with other requirements. This could take a while.\r\n",
+      "  Downloading langchain_openai-1.0.3-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-1.0.2-py3-none-any.whl.metadata (1.8 kB)\r\n",
+      "  Downloading langchain_openai-1.0.1-py3-none-any.whl.metadata (1.8 kB)\r\n",
+      "  Downloading langchain_openai-1.0.0-py3-none-any.whl.metadata (1.8 kB)\r\n",
+      "  Downloading langchain_openai-0.3.35-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "Requirement already satisfied: openai<3.0.0,>=1.104.2 in /usr/local/lib/python3.12/dist-packages (from langchain_openai) (2.15.0)\r\n",
+      "Requirement already satisfied: tiktoken<1.0.0,>=0.7.0 in /usr/local/lib/python3.12/dist-packages (from langchain_openai) (0.12.0)\r\n",
+      "Requirement already satisfied: tenacity!=8.4.0,<10.0.0,>=8.1.0 in /usr/local/lib/python3.12/dist-packages (from langchain-core>=0.1->langgraph) (9.1.2)\r\n",
+      "Requirement already satisfied: jsonpatch<2.0.0,>=1.33.0 in /usr/local/lib/python3.12/dist-packages (from langchain-core>=0.1->langgraph) (1.33)\r\n",
+      "Requirement already satisfied: typing-extensions<5.0.0,>=4.7.0 in /usr/local/lib/python3.12/dist-packages (from langchain-core>=0.1->langgraph) (4.15.0)\r\n",
+      "Collecting packaging<26.0.0,>=23.2.0 (from langchain-core>=0.1->langgraph)\r\n",
+      "  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)\r\n",
+      "Collecting ormsgpack>=1.12.0 (from langgraph-checkpoint<5.0.0,>=2.1.0->langgraph)\r\n",
+      "  Downloading ormsgpack-1.12.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.2 kB)\r\n",
+      "INFO: pip is looking at multiple versions of langgraph-prebuilt to determine which version is compatible with other requirements. This could take a while.\r\n",
+      "Collecting langgraph-checkpoint<5.0.0,>=2.1.0 (from langgraph)\r\n",
+      "  Downloading langgraph_checkpoint-3.0.1-py3-none-any.whl.metadata (4.7 kB)\r\n",
+      "  Downloading langgraph_checkpoint-3.0.0-py3-none-any.whl.metadata (4.2 kB)\r\n",
+      "  Downloading langgraph_checkpoint-2.1.2-py3-none-any.whl.metadata (4.2 kB)\r\n",
+      "  Downloading langgraph_checkpoint-2.1.1-py3-none-any.whl.metadata (4.2 kB)\r\n",
+      "  Downloading langgraph_checkpoint-2.1.0-py3-none-any.whl.metadata (4.2 kB)\r\n",
+      "Collecting langchain-text-splitters<1.0.0,>=0.3.9 (from langchain)\r\n",
+      "  Downloading langchain_text_splitters-0.3.11-py3-none-any.whl.metadata (1.8 kB)\r\n",
+      "INFO: pip is still looking at multiple versions of langgraph-prebuilt to determine which version is compatible with other requirements. This could take a while.\r\n",
+      "  Downloading langchain_text_splitters-0.3.10-py3-none-any.whl.metadata (1.9 kB)\r\n",
+      "Collecting pip>=25.2 (from langchain-text-splitters<1.0.0,>=0.3.9->langchain)\r\n",
+      "  Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)\r\n",
+      "INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.\r\n",
+      "Collecting langchain-text-splitters<1.0.0,>=0.3.9 (from langchain)\r\n",
+      "  Downloading langchain_text_splitters-0.3.9-py3-none-any.whl.metadata (1.9 kB)\r\n",
+      "INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.\r\n",
+      "Collecting langchain_openai\r\n",
+      "  Downloading langchain_openai-0.3.34-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.3.33-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "Collecting openai<2.0.0,>=1.104.2 (from langchain_openai)\r\n",
+      "  Downloading openai-1.109.1-py3-none-any.whl.metadata (29 kB)\r\n",
+      "Collecting langchain_openai\r\n",
+      "  Downloading langchain_openai-0.3.32-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.3.31-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.3.30-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.3.29-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.3.28-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.27-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.26-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.25-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.24-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.23-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.22-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.21-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.20-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.19-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.18-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.17-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.16-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.15-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.14-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.13-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.12-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.11-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.10-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.9-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.8-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.7-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.6-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.5-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.4-py3-none-any.whl.metadata (2.3 kB)\r\n",
+      "  Downloading langchain_openai-0.3.3-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.3.2-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.3.1-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.3.0-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.2.14-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.2.13-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.2.12-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.2.11-py3-none-any.whl.metadata (2.7 kB)\r\n",
+      "  Downloading langchain_openai-0.2.10-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.9-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.8-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.7-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.6-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.5-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.4-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.3-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.2-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.1-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.2.0-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.25-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.24-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.23-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.22-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.20-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.19-py3-none-any.whl.metadata (2.6 kB)\r\n",
+      "  Downloading langchain_openai-0.1.17-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.16-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.15-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.14-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.13-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.12-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.11-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.10-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.9-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.8-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.7-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.6-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.5-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.4-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.3-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.2-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.1.1-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.8-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.7-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.6-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.5-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.4-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.3-py3-none-any.whl.metadata (2.5 kB)\r\n",
+      "  Downloading langchain_openai-0.0.2.post1-py3-none-any.whl.metadata (2.4 kB)\r\n",
+      "  Downloading langchain_openai-0.0.2-py3-none-any.whl.metadata (570 bytes)\r\n",
+      "Collecting langchain\r\n",
+      "  Downloading langchain-1.2.9-py3-none-any.whl.metadata (5.7 kB)\r\n",
+      "Collecting langchain-core>=0.1 (from langgraph)\r\n",
+      "  Downloading langchain_core-1.2.9-py3-none-any.whl.metadata (4.4 kB)\r\n",
+      "Requirement already satisfied: packaging>=23.2.0 in /usr/local/lib/python3.12/dist-packages (from langchain-core>=0.1->langgraph) (26.0rc2)\r\n",
+      "Collecting uuid-utils<1.0,>=0.12.0 (from langchain-core>=0.1->langgraph)\r\n",
+      "  Downloading uuid_utils-0.14.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)\r\n",
+      "Requirement already satisfied: httpx>=0.25.2 in /usr/local/lib/python3.12/dist-packages (from langgraph-sdk<0.4.0,>=0.3.0->langgraph) (0.28.1)\r\n",
+      "Requirement already satisfied: orjson>=3.10.1 in /usr/local/lib/python3.12/dist-packages (from langgraph-sdk<0.4.0,>=0.3.0->langgraph) (3.11.3)\r\n",
+      "Requirement already satisfied: anyio<5,>=3.5.0 in /usr/local/lib/python3.12/dist-packages (from openai<3.0.0,>=1.104.2->langchain_openai) (4.12.1)\r\n",
+      "Requirement already satisfied: distro<2,>=1.7.0 in /usr/local/lib/python3.12/dist-packages (from openai<3.0.0,>=1.104.2->langchain_openai) (1.9.0)\r\n",
+      "Requirement already satisfied: jiter<1,>=0.10.0 in /usr/local/lib/python3.12/dist-packages (from openai<3.0.0,>=1.104.2->langchain_openai) (0.10.0)\r\n",
+      "Requirement already satisfied: sniffio in /usr/local/lib/python3.12/dist-packages (from openai<3.0.0,>=1.104.2->langchain_openai) (1.3.1)\r\n",
+      "Requirement already satisfied: tqdm>4 in /usr/local/lib/python3.12/dist-packages (from openai<3.0.0,>=1.104.2->langchain_openai) (4.67.1)\r\n",
+      "Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.7.4->langgraph) (0.7.0)\r\n",
+      "Requirement already satisfied: pydantic-core==2.41.5 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.7.4->langgraph) (2.41.5)\r\n",
+      "Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.7.4->langgraph) (0.4.2)\r\n",
+      "Requirement already satisfied: regex>=2022.1.18 in /usr/local/lib/python3.12/dist-packages (from tiktoken<1.0.0,>=0.7.0->langchain_openai) (2025.11.3)\r\n",
+      "Requirement already satisfied: idna>=2.8 in /usr/local/lib/python3.12/dist-packages (from anyio<5,>=3.5.0->openai<3.0.0,>=1.104.2->langchain_openai) (3.11)\r\n",
+      "Requirement already satisfied: certifi in /usr/local/lib/python3.12/dist-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (2026.1.4)\r\n",
+      "Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.12/dist-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (1.0.9)\r\n",
+      "Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.12/dist-packages (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (0.16.0)\r\n",
+      "Requirement already satisfied: jsonpointer>=1.9 in /usr/local/lib/python3.12/dist-packages (from jsonpatch<2.0.0,>=1.33.0->langchain-core>=0.1->langgraph) (3.0.0)\r\n",
+      "Requirement already satisfied: requests-toolbelt>=1.0.0 in /usr/local/lib/python3.12/dist-packages (from langsmith>=0.1.17->langchain) (1.0.0)\r\n",
+      "Requirement already satisfied: zstandard>=0.23.0 in /usr/local/lib/python3.12/dist-packages (from langsmith>=0.1.17->langchain) (0.25.0)\r\n",
+      "Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests<3,>=2->langchain) (3.4.4)\r\n",
+      "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests<3,>=2->langchain) (2.6.3)\r\n",
+      "Downloading langgraph-1.0.8-py3-none-any.whl (158 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m158.1/158.1 kB\u001b[0m \u001b[31m5.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading langchain-1.2.9-py3-none-any.whl (111 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m111.2/111.2 kB\u001b[0m \u001b[31m8.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading langchain_openai-1.1.7-py3-none-any.whl (84 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m84.8/84.8 kB\u001b[0m \u001b[31m5.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading langchain_core-1.2.9-py3-none-any.whl (496 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m496.3/496.3 kB\u001b[0m \u001b[31m15.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading langgraph_checkpoint-4.0.0-py3-none-any.whl (46 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m46.3/46.3 kB\u001b[0m \u001b[31m2.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading langgraph_prebuilt-1.0.7-py3-none-any.whl (35 kB)\r\n",
+      "Downloading langgraph_sdk-0.3.4-py3-none-any.whl (67 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m67.8/67.8 kB\u001b[0m \u001b[31m4.2 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading ormsgpack-1.12.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (212 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m212.6/212.6 kB\u001b[0m \u001b[31m15.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hDownloading uuid_utils-0.14.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (341 kB)\r\n",
+      "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m342.0/342.0 kB\u001b[0m \u001b[31m20.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\r\n",
+      "\u001b[?25hInstalling collected packages: uuid-utils, ormsgpack, langgraph-sdk, langchain-core, langgraph-checkpoint, langchain_openai, langgraph-prebuilt, langgraph, langchain\r\n",
+      "  Attempting uninstall: langchain-core\r\n",
+      "    Found existing installation: langchain-core 0.3.79\r\n",
+      "    Uninstalling langchain-core-0.3.79:\r\n",
+      "      Successfully uninstalled langchain-core-0.3.79\r\n",
+      "  Attempting uninstall: langchain\r\n",
+      "    Found existing installation: langchain 0.3.27\r\n",
+      "    Uninstalling langchain-0.3.27:\r\n",
+      "      Successfully uninstalled langchain-0.3.27\r\n",
+      "Successfully installed langchain-1.2.9 langchain-core-1.2.9 langchain_openai-1.1.7 langgraph-1.0.8 langgraph-checkpoint-4.0.0 langgraph-prebuilt-1.0.7 langgraph-sdk-0.3.4 ormsgpack-1.12.2 uuid-utils-0.14.0\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install langgraph langchain langchain_openai"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "e505931e",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:42:01.415305Z",
+     "iopub.status.busy": "2026-02-07T13:42:01.414533Z",
+     "iopub.status.idle": "2026-02-07T13:42:03.151594Z",
+     "shell.execute_reply": "2026-02-07T13:42:03.150919Z"
+    },
+    "papermill": {
+     "duration": 1.747228,
+     "end_time": "2026-02-07T13:42:03.153011",
+     "exception": false,
+     "start_time": "2026-02-07T13:42:01.405783",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "GaitCNNLSTM(\n",
+       "  (cnn): Sequential(\n",
+       "    (0): Conv1d(18, 64, kernel_size=(3,), stride=(1,), padding=(1,))\n",
+       "    (1): ReLU()\n",
+       "    (2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n",
+       "    (3): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)\n",
+       "    (4): Dropout(p=0.3, inplace=False)\n",
+       "  )\n",
+       "  (lstm): LSTM(64, 128, num_layers=2, batch_first=True, dropout=0.3)\n",
+       "  (fc): Sequential(\n",
+       "    (0): Linear(in_features=128, out_features=32, bias=True)\n",
+       "    (1): ReLU()\n",
+       "    (2): Linear(in_features=32, out_features=1, bias=True)\n",
+       "    (3): Sigmoid()\n",
+       "  )\n",
+       ")"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os\n",
+    "import torch\n",
+    "import joblib\n",
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "from typing import TypedDict, List, Annotated\n",
+    "from langgraph.graph import StateGraph, END\n",
+    "from langchain_core.messages import HumanMessage, SystemMessage\n",
+    "\n",
+    "voice_model = joblib.load('voice_agent_model.pkl')\n",
+    "voice_scaler = joblib.load('voice_agent_scaler.pkl')\n",
+    "\n",
+    "class GaitCNNLSTM(torch.nn.Module):\n",
+    "    def __init__(self, input_dim, hidden_dim, num_layers, num_classes=1):\n",
+    "        super(GaitCNNLSTM, self).__init__()\n",
+    "        self.cnn = torch.nn.Sequential(\n",
+    "            torch.nn.Conv1d(input_dim, 64, kernel_size=3, padding=1),\n",
+    "            torch.nn.ReLU(),\n",
+    "            torch.nn.BatchNorm1d(64),\n",
+    "            torch.nn.MaxPool1d(kernel_size=2),\n",
+    "            torch.nn.Dropout(0.3)\n",
+    "        )\n",
+    "        self.lstm = torch.nn.LSTM(64, hidden_dim, num_layers, batch_first=True, dropout=0.3)\n",
+    "        self.fc = torch.nn.Sequential(\n",
+    "            torch.nn.Linear(hidden_dim, 32),\n",
+    "            torch.nn.ReLU(),\n",
+    "            torch.nn.Linear(32, num_classes),\n",
+    "            torch.nn.Sigmoid()\n",
+    "        )\n",
+    "    def forward(self, x):\n",
+    "        x = x.permute(0, 2, 1)\n",
+    "        x = self.cnn(x)\n",
+    "        x = x.permute(0, 2, 1)\n",
+    "        out, _ = self.lstm(x)\n",
+    "        out = self.fc(out[:, -1, :])\n",
+    "        return out\n",
+    "\n",
+    "device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n",
+    "gait_model = GaitCNNLSTM(input_dim=18, hidden_dim=128, num_layers=2).to(device)\n",
+    "gait_model.load_state_dict(torch.load('gait_agent_weights.pth'))\n",
+    "gait_model.eval()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "080f8ae4",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:42:03.170069Z",
+     "iopub.status.busy": "2026-02-07T13:42:03.169484Z",
+     "iopub.status.idle": "2026-02-07T13:42:03.173166Z",
+     "shell.execute_reply": "2026-02-07T13:42:03.172591Z"
+    },
+    "papermill": {
+     "duration": 0.01354,
+     "end_time": "2026-02-07T13:42:03.174555",
+     "exception": false,
+     "start_time": "2026-02-07T13:42:03.161015",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "class AgentState(TypedDict):\n",
+    "    user_id: str\n",
+    "    voice_data: List[float]\n",
+    "    gait_data: List[float]\n",
+    "    voice_risk: float\n",
+    "    gait_risk: float\n",
+    "    final_diagnosis: str\n",
+    "    payout_triggered: bool\n",
+    "    transaction_receipt: str\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "d6b815d1",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:42:03.191977Z",
+     "iopub.status.busy": "2026-02-07T13:42:03.191477Z",
+     "iopub.status.idle": "2026-02-07T13:42:03.197931Z",
+     "shell.execute_reply": "2026-02-07T13:42:03.197304Z"
+    },
+    "papermill": {
+     "duration": 0.016255,
+     "end_time": "2026-02-07T13:42:03.199259",
+     "exception": false,
+     "start_time": "2026-02-07T13:42:03.183004",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def voice_diagnostic_node(state: AgentState):\n",
+    "    print(\"--- 🎙️ Agent 1: Voice Specialist Analyzing... ---\")\n",
+    "\n",
+    "    data = np.array(state['voice_data']).reshape(1, -1)\n",
+    "    scaled_data = voice_scaler.transform(data)\n",
+    "    \n",
+    "    prob = voice_model.predict_proba(scaled_data)[0][1]\n",
+    "    \n",
+    "    return {\"voice_risk\": float(prob)}\n",
+    "\n",
+    "def gait_verification_node(state: AgentState):\n",
+    "    print(\"--- 🚶 Agent 2: Gait Specialist Verifying... ---\")\n",
+    "    dummy_input = torch.randn(1, 128, 18).to(device) \n",
+    "    \n",
+    "    with torch.no_grad():\n",
+    "        prob = gait_model(dummy_input).item()\n",
+    "        \n",
+    "    return {\"gait_risk\": float(prob)}\n",
+    "\n",
+    "def supervisor_node(state: AgentState):\n",
+    "    print(\"--- 🧠 Supervisor Agent: Synthesizing Results... ---\")\n",
+    "    v_risk = state.get('voice_risk', 0.0)\n",
+    "    g_risk = state.get('gait_risk', 0.0)\n",
+    "    \n",
+    "    if v_risk > 0.8 and g_risk > 0.8:\n",
+    "        diagnosis = \"High Risk: Parkinson's Detected\"\n",
+    "        trigger = True\n",
+    "    elif v_risk > 0.5 or g_risk > 0.5:\n",
+    "        diagnosis = \"Moderate Risk: Clinical Monitoring Recommended\"\n",
+    "        trigger = False\n",
+    "    else:\n",
+    "        diagnosis = \"Healthy: No Anomalies Detected\"\n",
+    "        trigger = False\n",
+    "        \n",
+    "    return {\"final_diagnosis\": diagnosis, \"payout_triggered\": trigger}\n",
+    "\n",
+    "def settlement_node(state: AgentState):\n",
+    "    print(\"--- 💰 FinTech Agent: Processing Insurance Payout... ---\")\n",
+    "    if state['payout_triggered']:\n",
+    "        receipt = f\"TX_HASH: 0x{os.urandom(4).hex()}... | STATUS: CONFIRMED | AMT: 500 USDC\"\n",
+    "    else:\n",
+    "        receipt = \"N/A - Payout Condition Not Met\"\n",
+    "        \n",
+    "    return {\"transaction_receipt\": receipt}\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "b8228aa5",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:42:03.215832Z",
+     "iopub.status.busy": "2026-02-07T13:42:03.215389Z",
+     "iopub.status.idle": "2026-02-07T13:42:03.223705Z",
+     "shell.execute_reply": "2026-02-07T13:42:03.223089Z"
+    },
+    "papermill": {
+     "duration": 0.018052,
+     "end_time": "2026-02-07T13:42:03.225197",
+     "exception": false,
+     "start_time": "2026-02-07T13:42:03.207145",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "LangGraph Agent Mesh Compiled Successfully!\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "workflow = StateGraph(AgentState)\n",
+    "\n",
+    "workflow.add_node(\"voice_agent\", voice_diagnostic_node)\n",
+    "workflow.add_node(\"gait_agent\", gait_verification_node)\n",
+    "workflow.add_node(\"supervisor\", supervisor_node)\n",
+    "workflow.add_node(\"fintech_agent\", settlement_node)\n",
+    "\n",
+    "workflow.set_entry_point(\"voice_agent\")\n",
+    "workflow.add_edge(\"voice_agent\", \"gait_agent\")\n",
+    "workflow.add_edge(\"gait_agent\", \"supervisor\")\n",
+    "\n",
+    "workflow.add_edge(\"supervisor\", \"fintech_agent\")\n",
+    "workflow.add_edge(\"fintech_agent\", END)\n",
+    "\n",
+    "app = workflow.compile()\n",
+    "\n",
+    "print(\"LangGraph Agent Mesh Compiled Successfully!\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "2280a65f",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:42:03.241715Z",
+     "iopub.status.busy": "2026-02-07T13:42:03.241519Z",
+     "iopub.status.idle": "2026-02-07T13:42:03.257515Z",
+     "shell.execute_reply": "2026-02-07T13:42:03.256784Z"
+    },
+    "papermill": {
+     "duration": 0.026011,
+     "end_time": "2026-02-07T13:42:03.258924",
+     "exception": false,
+     "start_time": "2026-02-07T13:42:03.232913",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--- 🎙️ Agent 1: Voice Specialist Analyzing... ---\n",
+      "--- 🚶 Agent 2: Gait Specialist Verifying... ---\n",
+      "--- 🧠 Supervisor Agent: Synthesizing Results... ---\n",
+      "--- 💰 FinTech Agent: Processing Insurance Payout... ---\n",
+      "\n",
+      "--- FINAL REPORT ---\n",
+      "Diagnosis: Moderate Risk: Clinical Monitoring Recommended\n",
+      "Voice Risk: 0.89\n",
+      "Gait Risk: 0.00\n",
+      "Blockchain Receipt: N/A - Payout Condition Not Met\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names\n",
+      "  warnings.warn(\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "dummy_voice_features = np.random.rand(22).tolist()\n",
+    "dummy_gait_sequence = np.random.rand(128*18).tolist()\n",
+    "\n",
+    "initial_state = {\n",
+    "    \"user_id\": \"Patient_001\",\n",
+    "    \"voice_data\": dummy_voice_features,\n",
+    "    \"gait_data\": dummy_gait_sequence\n",
+    "}\n",
+    "\n",
+    "# Run the Graph\n",
+    "result = app.invoke(initial_state)\n",
+    "\n",
+    "print(\"\\n--- FINAL REPORT ---\")\n",
+    "print(f\"Diagnosis: {result['final_diagnosis']}\")\n",
+    "print(f\"Voice Risk: {result['voice_risk']:.2f}\")\n",
+    "print(f\"Gait Risk: {result['gait_risk']:.2f}\")\n",
+    "print(f\"Blockchain Receipt: {result['transaction_receipt']}\")"
+   ]
   }
  ],
  "metadata": {
@@ -437,14 +994,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 72.177192,
-   "end_time": "2026-02-07T13:30:19.688839",
+   "duration": 96.813244,
+   "end_time": "2026-02-07T13:42:06.344159",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-02-07T13:29:07.511647",
+   "start_time": "2026-02-07T13:40:29.530915",
    "version": "2.6.0"
   }
  },
