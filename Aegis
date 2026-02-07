@@ -1,1 +1,453 @@
-{"metadata":{"kernelspec":{"language":"python","display_name":"Python 3","name":"python3"},"language_info":{"name":"python","version":"3.12.12","mimetype":"text/x-python","codemirror_mode":{"name":"ipython","version":3},"pygments_lexer":"ipython3","nbconvert_exporter":"python","file_extension":".py"}},"nbformat_minor":4,"nbformat":4,"cells":[{"cell_type":"code","source":"import pandas as pd\nimport numpy as np\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nfrom sklearn.preprocessing import MinMaxScaler, StandardScaler\nfrom imblearn.over_sampling import SMOTE\nfrom torch.utils.data import DataLoader, TensorDataset\n\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\n\nvoice_df = pd.read_csv('/kaggle/input/parkinsons-data-set/parkinsons.data')\n\n# Drop 'name' (non-numeric) and 'status' (target)\nX_voice = voice_df.drop(['name', 'status'], axis=1).values\ny_voice = voice_df['status'].values\n\n# Normalize using MinMax: $x_{norm} = \\frac{x - \\min(x)}{\\max(x) - \\min(x)}$\nscaler_voice = MinMaxScaler(feature_range=(-1, 1))\nX_voice_scaled = scaler_voice.fit_transform(X_voice)\n\n# Balance the classes using SMOTE\nsmote = SMOTE(random_state=42)\nX_voice_final, y_voice_final = smote.fit_resample(X_voice_scaled, y_voice)","metadata":{"trusted":true,"execution":{"iopub.status.busy":"2026-02-07T12:43:43.950267Z","iopub.execute_input":"2026-02-07T12:43:43.950550Z","iopub.status.idle":"2026-02-07T12:43:50.017124Z","shell.execute_reply.started":"2026-02-07T12:43:43.950514Z","shell.execute_reply":"2026-02-07T12:43:50.016307Z"}},"outputs":[],"execution_count":1},{"cell_type":"code","source":"import os\nimport glob\n\n# Define columns: 1=Time, 2-9=Left sensors, 10-17=Right sensors, 18-19=Total Force\ngait_cols = + [f'L{i}' for i in range(8)] + +\n\ndef load_all_gait_files(path_pattern):\n    all_windows =\n    all_labels =\n    \n    file_list = glob.glob(path_pattern)\n    print(f\"Found {len(file_list)} gait files. Processing...\")\n\n    for file_path in file_list:\n        # Determine label from filename: 'Co' = 0 (Healthy), 'Pt' = 1 (Parkinson's)\n        label = 1 if 'GaPt' in file_path else 0\n        \n        try:\n            df = pd.read_csv(file_path, sep='\\s+', header=None, names=gait_cols)\n            # Remove Time and normalize\n            features = df.drop(, axis=1).values\n            scaled_features = StandardScaler().fit_transform(features)\n            \n            # Create 5-second windows (250 timesteps)\n            windows = create_windows(scaled_features)\n            \n            all_windows.append(windows)\n            all_labels.extend([label] * len(windows))\n        except Exception as e:\n            print(f\"Skipping {file_path} due to error: {e}\")\n\n    return np.vstack(all_windows), np.array(all_labels)\n\n# Run the bulk loader\nX_gait_bulk, y_gait_bulk = load_all_gait_files('/kaggle/input/gait-in-parkinsons-disease/*.txt')\nprint(f\"Final Gait Dataset: {X_gait_bulk.shape} samples with {len(np.unique(y_gait_bulk))} classes.\")","metadata":{"trusted":true,"execution":{"iopub.status.busy":"2026-02-07T12:43:55.691801Z","iopub.execute_input":"2026-02-07T12:43:55.692126Z","iopub.status.idle":"2026-02-07T12:43:55.698788Z","shell.execute_reply.started":"2026-02-07T12:43:55.692098Z","shell.execute_reply":"2026-02-07T12:43:55.697819Z"}},"outputs":[{"traceback":["\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_55/2471570161.py\"\u001b[0;36m, line \u001b[0;32m5\u001b[0m\n\u001b[0;31m    gait_cols = + [f'L{i}' for i in range(8)] + +\u001b[0m\n\u001b[0m                                                 ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"],"ename":"SyntaxError","evalue":"invalid syntax (2471570161.py, line 5)","output_type":"error"}],"execution_count":2},{"cell_type":"code","source":"class AegisFusionModel(nn.Module):\n    def __init__(self, voice_dim=22, gait_dim=18):\n        super(AegisFusionModel, self).__init__()\n        \n        # Voice Encoder\n        self.voice_branch = nn.Sequential(\n            nn.Linear(voice_dim, 64),\n            nn.BatchNorm1d(64),\n            nn.ReLU(),\n            nn.Linear(64, 128)\n        )\n        \n        # Gait Encoder: CNN for spatial + BiLSTM for temporal\n        self.gait_cnn = nn.Conv1d(gait_dim, 64, kernel_size=3, padding=1)\n        self.gait_lstm = nn.LSTM(64, 64, num_layers=2, batch_first=True, bidirectional=True)\n        self.gait_fc = nn.Linear(128, 128)\n        \n        # Cross-Modal Fusion \n        self.attention = nn.MultiheadAttention(embed_dim=128, num_heads=4)\n        \n        self.classifier = nn.Sequential(\n            nn.Linear(128, 1),\n            nn.Sigmoid()\n        )\n\n    def forward(self, v_x=None, g_x=None):\n        v_feat = self.voice_branch(v_x) if v_x is not None else None\n        \n        g_feat = None\n        if g_x is not None:\n            g_x = self.gait_cnn(g_x.transpose(1, 2)).transpose(1, 2)\n            _, (hn, _) = self.gait_lstm(g_x)\n            g_feat = self.gait_fc(torch.cat((hn[-2,:,:], hn[-1,:,:]), dim=1))\n            \n        # Use available modality for the final prediction\n        out_feat = v_feat if v_feat is not None else g_feat\n        if v_feat is not None and g_feat is not None:\n            # Attend to both if both exist\n            attn_out, _ = self.attention(v_feat.unsqueeze(0), g_feat.unsqueeze(0), g_feat.unsqueeze(0))\n            out_feat = attn_out.squeeze(0)\n            \n        return self.classifier(out_feat)\n\nmodel = AegisFusionModel().to(device)","metadata":{"trusted":true},"outputs":[],"execution_count":null},{"cell_type":"code","source":"# Create updated DataLoaders\nv_loader = DataLoader(TensorDataset(torch.FloatTensor(X_voice_final).to(device), \n                                    torch.FloatTensor(y_voice_final).to(device)), \n                      batch_size=32, shuffle=True)\n\ng_loader = DataLoader(TensorDataset(torch.FloatTensor(X_gait_bulk).to(device), \n                                    torch.FloatTensor(y_gait_bulk).to(device)), \n                      batch_size=32, shuffle=True)\n\ndef train_aegis_final(model, epochs=100):\n    optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-4)\n    criterion = nn.BCELoss()\n    \n    for epoch in range(epochs):\n        model.train()\n        total_loss = 0\n        \n        # Zip allows the model to see a voice batch and a gait batch in one step\n        for (v_batch_x, v_batch_y), (g_batch_x, g_batch_y) in zip(v_loader, g_loader):\n            optimizer.zero_grad()\n            \n            # Forward passes for both modalities\n            v_out = model(v_x=v_batch_x)\n            g_out = model(g_x=g_batch_x)\n            \n            loss = criterion(v_out, v_batch_y.unsqueeze(1)) + criterion(g_out, g_batch_y.unsqueeze(1))\n            loss.backward()\n            optimizer.step()\n            total_loss += loss.item()\n            \n        if epoch % 10 == 0:\n            print(f\"Epoch {epoch} | Aggregated Loss: {total_loss/len(v_loader):.4f}\")\n\ntrain_aegis_final(model)","metadata":{"trusted":true},"outputs":[],"execution_count":null}]}
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "509c37d1",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:29:10.204587Z",
+     "iopub.status.busy": "2026-02-07T13:29:10.204330Z",
+     "iopub.status.idle": "2026-02-07T13:29:16.925903Z",
+     "shell.execute_reply": "2026-02-07T13:29:16.925058Z"
+    },
+    "papermill": {
+     "duration": 6.726446,
+     "end_time": "2026-02-07T13:29:16.927624",
+     "exception": false,
+     "start_time": "2026-02-07T13:29:10.201178",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Using device: cuda\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import os\n",
+    "import torch\n",
+    "import torch.nn as nn\n",
+    "import torch.optim as optim\n",
+    "from torch.utils.data import Dataset, DataLoader\n",
+    "from sklearn.model_selection import train_test_split\n",
+    "from sklearn.preprocessing import MinMaxScaler, StandardScaler\n",
+    "from sklearn.metrics import accuracy_score, classification_report\n",
+    "import xgboost as xgb\n",
+    "import joblib\n",
+    "\n",
+    "SEED = 2026\n",
+    "np.random.seed(SEED)\n",
+    "torch.manual_seed(SEED)\n",
+    "if torch.cuda.is_available():\n",
+    "    torch.cuda.manual_seed(SEED)\n",
+    "\n",
+    "device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n",
+    "print(f\"Using device: {device}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "d268ffea",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:29:16.932276Z",
+     "iopub.status.busy": "2026-02-07T13:29:16.931937Z",
+     "iopub.status.idle": "2026-02-07T13:29:17.305555Z",
+     "shell.execute_reply": "2026-02-07T13:29:17.304328Z"
+    },
+    "papermill": {
+     "duration": 0.377794,
+     "end_time": "2026-02-07T13:29:17.307212",
+     "exception": false,
+     "start_time": "2026-02-07T13:29:16.929418",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--- Training Voice Diagnostic Agent ---\n",
+      "Voice Agent Accuracy: 0.9231\n",
+      "              precision    recall  f1-score   support\n",
+      "\n",
+      "           0       0.90      0.82      0.86        11\n",
+      "           1       0.93      0.96      0.95        28\n",
+      "\n",
+      "    accuracy                           0.92        39\n",
+      "   macro avg       0.92      0.89      0.90        39\n",
+      "weighted avg       0.92      0.92      0.92        39\n",
+      "\n",
+      "Voice Agent artifacts saved.\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/usr/local/lib/python3.12/dist-packages/xgboost/training.py:199: UserWarning: [13:29:17] WARNING: /workspace/src/learner.cc:790: \n",
+      "Parameters: { \"use_label_encoder\" } are not used.\n",
+      "\n",
+      "  bst.update(dtrain, iteration=i, fobj=obj)\n"
+     ]
+    }
+   ],
+   "source": [
+    "def train_voice_agent(file_path):\n",
+    "    print(\"--- Training Voice Diagnostic Agent ---\")\n",
+    "    \n",
+    "    df = pd.read_csv(file_path)\n",
+    "    \n",
+    "    X = df.drop(['name', 'status'], axis=1)\n",
+    "    y = df['status']\n",
+    "    \n",
+    "    # Split data\n",
+    "    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=SEED)\n",
+    "    \n",
+    "    scaler = StandardScaler()\n",
+    "    X_train_scaled = scaler.fit_transform(X_train)\n",
+    "    X_test_scaled = scaler.transform(X_test)\n",
+    "    \n",
+    "    model = xgb.XGBClassifier(\n",
+    "        n_estimators=100,\n",
+    "        learning_rate=0.1,\n",
+    "        max_depth=5,\n",
+    "        use_label_encoder=False,\n",
+    "        eval_metric='logloss'\n",
+    "    )\n",
+    "    \n",
+    "    model.fit(X_train_scaled, y_train)\n",
+    "    \n",
+    "    preds = model.predict(X_test_scaled)\n",
+    "    acc = accuracy_score(y_test, preds)\n",
+    "    print(f\"Voice Agent Accuracy: {acc:.4f}\")\n",
+    "    print(classification_report(y_test, preds))\n",
+    "    \n",
+    "    joblib.dump(model, 'voice_agent_model.pkl')\n",
+    "    joblib.dump(scaler, 'voice_agent_scaler.pkl')\n",
+    "    print(\"Voice Agent artifacts saved.\")\n",
+    "\n",
+    "train_voice_agent('/kaggle/input/parkinsons-data-set/parkinsons.data')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "54d8ebca",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:29:17.312072Z",
+     "iopub.status.busy": "2026-02-07T13:29:17.311792Z",
+     "iopub.status.idle": "2026-02-07T13:29:31.302832Z",
+     "shell.execute_reply": "2026-02-07T13:29:31.301809Z"
+    },
+    "papermill": {
+     "duration": 13.995201,
+     "end_time": "2026-02-07T13:29:31.304290",
+     "exception": false,
+     "start_time": "2026-02-07T13:29:17.309089",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--- Processing Gait Data ---\n",
+      "Total Sequences: 25730\n"
+     ]
+    }
+   ],
+   "source": [
+    "class GaitDataset(Dataset):\n",
+    "    def __init__(self, data_dir, sequence_length=128):\n",
+    "        self.data = []\n",
+    "        self.labels = []\n",
+    "        self.sequence_length = sequence_length\n",
+    "        \n",
+    "        file_list = [f for f in os.listdir(data_dir) if f.endswith('.txt') and 'SHA' not in f and 'format' not in f and 'demographics' not in f]\n",
+    "        \n",
+    "        for file in file_list:\n",
+    "            file_path = os.path.join(data_dir, file)\n",
+    "            label = 1 if 'Pt' in file else 0 \n",
+    "            \n",
+    "            try:\n",
+    "                curr_data = pd.read_csv(file_path, sep='\\t', header=None, on_bad_lines='skip')\n",
+    "                sensor_data = curr_data.iloc[:, 1:].values.astype(np.float32)\n",
+    "                \n",
+    "                num_sequences = len(sensor_data) // sequence_length\n",
+    "                for i in range(num_sequences):\n",
+    "                    start = i * sequence_length\n",
+    "                    end = start + sequence_length\n",
+    "                    self.data.append(sensor_data[start:end])\n",
+    "                    self.labels.append(label)\n",
+    "                    \n",
+    "            except Exception as e:\n",
+    "                print(f\"Skipping {file}: {e}\")\n",
+    "\n",
+    "        self.data = np.array(self.data)\n",
+    "        self.data = torch.tensor(self.data, dtype=torch.float32)\n",
+    "        self.labels = torch.tensor(self.labels, dtype=torch.float32).unsqueeze(1)\n",
+    "\n",
+    "    def __len__(self):\n",
+    "        return len(self.data)\n",
+    "\n",
+    "    def __getitem__(self, idx):\n",
+    "        return self.data[idx], self.labels[idx]\n",
+    "\n",
+    "# Configuration\n",
+    "SEQ_LEN = 128\n",
+    "BATCH_SIZE = 32\n",
+    "\n",
+    "# Load Data\n",
+    "print(\"--- Processing Gait Data ---\")\n",
+    "gait_dir = '/kaggle/input/gait-in-parkinsons-disease'\n",
+    "full_dataset = GaitDataset(gait_dir, sequence_length=SEQ_LEN)\n",
+    "\n",
+    "# Split Train/Val\n",
+    "train_size = int(0.8 * len(full_dataset))\n",
+    "test_size = len(full_dataset) - train_size\n",
+    "train_dataset, test_dataset = torch.utils.data.random_split(full_dataset, [train_size, test_size])\n",
+    "\n",
+    "train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)\n",
+    "test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)\n",
+    "\n",
+    "print(f\"Total Sequences: {len(full_dataset)}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "0a3c16e4",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:29:31.309306Z",
+     "iopub.status.busy": "2026-02-07T13:29:31.308679Z",
+     "iopub.status.idle": "2026-02-07T13:29:36.617385Z",
+     "shell.execute_reply": "2026-02-07T13:29:36.616576Z"
+    },
+    "papermill": {
+     "duration": 5.313387,
+     "end_time": "2026-02-07T13:29:36.619380",
+     "exception": false,
+     "start_time": "2026-02-07T13:29:31.305993",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Model Initialized with Input Dimension: 18\n"
+     ]
+    }
+   ],
+   "source": [
+    "class GaitCNNLSTM(nn.Module):\n",
+    "    def __init__(self, input_dim, hidden_dim, num_layers, num_classes=1):\n",
+    "        super(GaitCNNLSTM, self).__init__()\n",
+    "        \n",
+    "        self.cnn = nn.Sequential(\n",
+    "            nn.Conv1d(in_channels=input_dim, out_channels=64, kernel_size=3, padding=1),\n",
+    "            nn.ReLU(),\n",
+    "            nn.BatchNorm1d(64),\n",
+    "            nn.MaxPool1d(kernel_size=2),\n",
+    "            nn.Dropout(0.3)\n",
+    "        )\n",
+    "        \n",
+    "        self.lstm = nn.LSTM(\n",
+    "            input_size=64, \n",
+    "            hidden_size=hidden_dim, \n",
+    "            num_layers=num_layers, \n",
+    "            batch_first=True,\n",
+    "            dropout=0.3\n",
+    "        )\n",
+    "        \n",
+    "        self.fc = nn.Sequential(\n",
+    "            nn.Linear(hidden_dim, 32),\n",
+    "            nn.ReLU(),\n",
+    "            nn.Linear(32, num_classes),\n",
+    "            nn.Sigmoid()\n",
+    "        )\n",
+    "\n",
+    "    def forward(self, x):\n",
+    "        x = x.permute(0, 2, 1) \n",
+    "        x = self.cnn(x) \n",
+    "        x = x.permute(0, 2, 1)\n",
+    "        \n",
+    "        out, _ = self.lstm(x)\n",
+    "        \n",
+    "        out = out[:, -1, :] \n",
+    "        \n",
+    "        out = self.fc(out)\n",
+    "        return out\n",
+    "\n",
+    "sample_data, _ = full_dataset[0]\n",
+    "INPUT_DIM = sample_data.shape[1] \n",
+    "\n",
+    "model = GaitCNNLSTM(input_dim=INPUT_DIM, hidden_dim=128, num_layers=2).to(device)\n",
+    "criterion = nn.BCELoss()\n",
+    "optimizer = optim.Adam(model.parameters(), lr=0.001)\n",
+    "\n",
+    "print(f\"Model Initialized with Input Dimension: {INPUT_DIM}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "e11511db",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-02-07T13:29:36.624892Z",
+     "iopub.status.busy": "2026-02-07T13:29:36.624400Z",
+     "iopub.status.idle": "2026-02-07T13:30:16.628998Z",
+     "shell.execute_reply": "2026-02-07T13:30:16.628111Z"
+    },
+    "papermill": {
+     "duration": 40.009208,
+     "end_time": "2026-02-07T13:30:16.630702",
+     "exception": false,
+     "start_time": "2026-02-07T13:29:36.621494",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--- Starting Gait Model Training ---\n",
+      "Epoch 1/15, Loss: 0.5435\n",
+      "Epoch 2/15, Loss: 0.4443\n",
+      "Epoch 3/15, Loss: 0.3261\n",
+      "Epoch 4/15, Loss: 0.2599\n",
+      "Epoch 5/15, Loss: 0.2234\n",
+      "Epoch 6/15, Loss: 0.1867\n",
+      "Epoch 7/15, Loss: 0.1401\n",
+      "Epoch 8/15, Loss: 0.1163\n",
+      "Epoch 9/15, Loss: 0.0928\n",
+      "Epoch 10/15, Loss: 0.0816\n",
+      "Epoch 11/15, Loss: 0.0728\n",
+      "Epoch 12/15, Loss: 0.0607\n",
+      "Epoch 13/15, Loss: 0.0597\n",
+      "Epoch 14/15, Loss: 0.0524\n",
+      "Epoch 15/15, Loss: 0.0476\n",
+      "Gait Model Accuracy: 0.9817333851535173\n",
+      "Gait Agent weights saved as 'gait_agent_weights.pth'\n"
+     ]
+    }
+   ],
+   "source": [
+    "def train_gait_model(num_epochs=10):\n",
+    "    print(\"--- Starting Gait Model Training ---\")\n",
+    "    \n",
+    "    for epoch in range(num_epochs):\n",
+    "        model.train()\n",
+    "        running_loss = 0.0\n",
+    "        \n",
+    "        for inputs, labels in train_loader:\n",
+    "            inputs, labels = inputs.to(device), labels.to(device)\n",
+    "            \n",
+    "            optimizer.zero_grad()\n",
+    "            outputs = model(inputs)\n",
+    "            loss = criterion(outputs, labels)\n",
+    "            loss.backward()\n",
+    "            optimizer.step()\n",
+    "            \n",
+    "            running_loss += loss.item()\n",
+    "            \n",
+    "        print(f\"Epoch {epoch+1}/{num_epochs}, Loss: {running_loss/len(train_loader):.4f}\")\n",
+    "        \n",
+    "    # Evaluation\n",
+    "    model.eval()\n",
+    "    all_preds = []\n",
+    "    all_labels = []\n",
+    "    with torch.no_grad():\n",
+    "        for inputs, labels in test_loader:\n",
+    "            inputs = inputs.to(device)\n",
+    "            outputs = model(inputs)\n",
+    "            preds = (outputs > 0.5).float().cpu().numpy()\n",
+    "            all_preds.extend(preds)\n",
+    "            all_labels.extend(labels.numpy())\n",
+    "            \n",
+    "    print(\"Gait Model Accuracy:\", accuracy_score(all_labels, all_preds))\n",
+    "    \n",
+    "    # Save Model for Website\n",
+    "    torch.save(model.state_dict(), 'gait_agent_weights.pth')\n",
+    "    print(\"Gait Agent weights saved as 'gait_agent_weights.pth'\")\n",
+    "\n",
+    "# Run Training\n",
+    "train_gait_model(num_epochs=15)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kaggle": {
+   "accelerator": "nvidiaTeslaT4",
+   "dataSources": [
+    {
+     "datasetId": 409297,
+     "sourceId": 783889,
+     "sourceType": "datasetVersion"
+    },
+    {
+     "datasetId": 2257980,
+     "sourceId": 3783036,
+     "sourceType": "datasetVersion"
+    }
+   ],
+   "dockerImageVersionId": 31260,
+   "isGpuEnabled": true,
+   "isInternetEnabled": true,
+   "language": "python",
+   "sourceType": "notebook"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.12"
+  },
+  "papermill": {
+   "default_parameters": {},
+   "duration": 72.177192,
+   "end_time": "2026-02-07T13:30:19.688839",
+   "environment_variables": {},
+   "exception": null,
+   "input_path": "__notebook__.ipynb",
+   "output_path": "__notebook__.ipynb",
+   "parameters": {},
+   "start_time": "2026-02-07T13:29:07.511647",
+   "version": "2.6.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
